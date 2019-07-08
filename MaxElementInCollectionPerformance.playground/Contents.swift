@@ -11,11 +11,11 @@ struct Solution {
     }
     
     static func usingMaxBy(_ given: [UInt32]) -> UInt32! {
-        return given.max(by: { $0 < $1 })
+        return given.max(by: < )
     }
     
     static func usingReduce(_ given: [UInt32]) -> UInt32! {
-        return given.reduce(UInt32.min, { max($0, $1) })
+        return given.reduce(UInt32.min, max)
     }
     
     static func usingSortReturnLast(_ given: [UInt32]) -> UInt32! {
