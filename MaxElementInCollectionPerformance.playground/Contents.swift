@@ -10,12 +10,12 @@ struct Solution {
         return given.max(by: { $0 < $1 })
     }
     
-    static func usingSortReturnLast(_ given: [UInt32]) -> UInt32! {
-        return given.sorted().last!
-    }
-    
     static func usingReduce(_ given: [UInt32]) -> UInt32! {
         return given.reduce(UInt32.min, { max($0, $1) })
+    }
+    
+    static func usingSortReturnLast(_ given: [UInt32]) -> UInt32! {
+        return given.sorted().last!
     }
     
 }
@@ -47,14 +47,15 @@ final class PerformanceTests: XCTestCase {
         }
     }
     
-    func testUsingSortReturnLast() {
-        measure {
-            XCTAssertEqual(maxValue, Solution.usingSortReturnLast(given))
-        }
-    }
     func testUsingReduce() {
         measure {
             XCTAssertEqual(maxValue, Solution.usingReduce(given))
+        }
+    }
+    
+    func testUsingSortReturnLast() {
+        measure {
+            XCTAssertEqual(maxValue, Solution.usingSortReturnLast(given))
         }
     }
     
