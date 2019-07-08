@@ -27,10 +27,16 @@
 For array with 100000 elements with maxValue 100000
 
 Solution 1	average: 0.051
+
 Solution 2	average: 0.104
+
 Solution 3A	average: 0.058
+
 Solution 3B	average: 2.359
+
 Solution 4A	average: 0.074
+
 Solution 4B	average: 2.587
+
 Solution 5	average: 1.244
 	
