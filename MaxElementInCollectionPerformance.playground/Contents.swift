@@ -2,20 +2,28 @@ import XCTest
 
 struct Solution {
     
-    static func usingKeyPath(_ given: [UInt32]) -> UInt32! {
-        return (given as AnyObject).value(forKeyPath: "@max.self") as? UInt32
-    }
-    
     static func usingMax(_ given: [UInt32]) -> UInt32! {
         return given.max()
+    }
+    
+    static func usingKeyPath(_ given: [UInt32]) -> UInt32! {
+        return (given as AnyObject).value(forKeyPath: "@max.self") as? UInt32
     }
     
     static func usingMaxBy(_ given: [UInt32]) -> UInt32! {
         return given.max(by: < )
     }
     
+    static func usingMaxByCustom(_ given: [UInt32]) -> UInt32! {
+        return given.max(by: { $0 < $1 })
+    }
+    
     static func usingReduce(_ given: [UInt32]) -> UInt32! {
         return given.reduce(UInt32.min, max)
+    }
+    
+    static func usingReduceCustom(_ given: [UInt32]) -> UInt32! {
+        return given.reduce(UInt32.min, { max($0, $1) })
     }
     
     static func usingSortReturnLast(_ given: [UInt32]) -> UInt32! {
@@ -52,15 +60,27 @@ final class PerformanceTests: XCTestCase {
     }
     
     
-    func testSolution3() {
+    func testSolution3A() {
         measure {
             XCTAssertEqual(maxValue, Solution.usingMaxBy(given))
         }
     }
     
-    func testSolution4() {
+    func testSolution3B() {
+        measure {
+            XCTAssertEqual(maxValue, Solution.usingMaxByCustom(given))
+        }
+    }
+    
+    func testSolution4A() {
         measure {
             XCTAssertEqual(maxValue, Solution.usingReduce(given))
+        }
+    }
+    
+    func testSolution4B() {
+        measure {
+            XCTAssertEqual(maxValue, Solution.usingReduceCustom(given))
         }
     }
     
