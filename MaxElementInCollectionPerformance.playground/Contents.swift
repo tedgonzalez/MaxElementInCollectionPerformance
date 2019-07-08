@@ -2,6 +2,10 @@ import XCTest
 
 struct Solution {
     
+    static func usingKeyPath(_ given: [UInt32]) -> UInt32! {
+        return (given as AnyObject).value(forKeyPath: "@max.self") as? UInt32
+    }
+    
     static func usingMax(_ given: [UInt32]) -> UInt32! {
         return given.max()
     }
@@ -35,25 +39,32 @@ final class PerformanceTests: XCTestCase {
         given.insert(maxValue, at: Int(arc4random()) % maxCount)
     }
     
-    func testUsingMax() {
+    func testSolution1() {
         measure {
-             XCTAssertEqual(maxValue, Solution.usingMax(given))
+            XCTAssertEqual(maxValue, Solution.usingMax(given))
         }
     }
     
-    func testUsingMaxBy() {
+    func testSolution2() {
+        measure {
+            XCTAssertEqual(maxValue, Solution.usingKeyPath(given))
+        }
+    }
+    
+    
+    func testSolution3() {
         measure {
             XCTAssertEqual(maxValue, Solution.usingMaxBy(given))
         }
     }
     
-    func testUsingReduce() {
+    func testSolution4() {
         measure {
             XCTAssertEqual(maxValue, Solution.usingReduce(given))
         }
     }
     
-    func testUsingSortReturnLast() {
+    func testSolution5() {
         measure {
             XCTAssertEqual(maxValue, Solution.usingSortReturnLast(given))
         }
